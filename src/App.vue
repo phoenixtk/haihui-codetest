@@ -4,7 +4,7 @@
                 class="particles"
                 color="#dedede"
                 :particleOpacity="0.7"
-                :particlesNumber="80"
+                :particlesNumber="10"
                 shapeType="circle"
                 :particleSize="4"
                 linesColor="#dedede"
