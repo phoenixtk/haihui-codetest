@@ -5,12 +5,10 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 // @ts-ignore
-import ElementUI from 'element-ui'
 import './styles.scss'
 import './plugins/element.js'
 import './plugins/axios.js'
-
-Vue.use(ElementUI)
+import './plugins/particles.js'
 
 Vue.config.productionTip = false
 
