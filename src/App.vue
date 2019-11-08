@@ -71,6 +71,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            z-index: 1;
         }
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -81,6 +82,10 @@
 
         .container {
             height: 100%;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
 
             .header {
                 background: #30c9e8;
