@@ -151,16 +151,13 @@
                         this.$message.error(`oh no, too many cats here, doesn't work!`);
                         return;
                     }
-
-
-                    var rect = new fabric.Rect({
-                        left: 800 * Math.random(),//距离画布左侧的距离，单位是像素
-                        top: 800 * Math.random(),//距离画布上边的距离
-                        fill: 'red',//填充的颜色
-                        width: 30,//方形的宽度
-                        height: 30//方形的高度
+                    fabric.Image.fromURL(require("@/assets/images/cats/cat" + this.imgcount + ".jpg"), function (oImg) {
+                        oImg.width = 80;
+                        oImg.height = 80;
+                        oImg.left = 700 * Math.random();
+                        oImg.top = 700 * Math.random();
+                        stcanvas.add(oImg);
                     });
-                    stcanvas.add(rect);
                 }
             }
         },
