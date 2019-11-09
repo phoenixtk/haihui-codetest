@@ -36,7 +36,28 @@
                 <canvas id="stcanvas" width='800' height='800'></canvas>
             </div>
             <div style="margin: 50px">
-                <el-button @click="downloadImg">download</el-button>
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span>Operation Manual</span>
+                    </div>
+                    <div class="text item">
+                        ①click the cats
+                    </div>
+                    <div class="text item">
+                        ②edit as you wish
+                    </div>
+                    <div class="text item">
+                        ③click download to get your image
+                    </div>
+                    <div class="text item">
+                        have fun!
+                    </div>
+                    <div class="text item" style="height: 30px">
+                    </div>
+                    <div class="text item">
+                        <el-button @click="downloadImg">download</el-button>
+                    </div>
+                </el-card>
             </div>
 
         </div>
@@ -232,7 +253,6 @@
             margin: 15px;
             border-radius: 10px;
             background-color: white;
-            margin: 15px;
             display: flex;
         }
     }
@@ -241,5 +261,12 @@
         margin: 15px;
         border: 1px solid #d3d1ff;
         border-radius: 10px
+    }
+    .box-card {
+        text-align: left;
+        .item{
+            color: #d3d1ff;
+            font-size: 14px;
+        }
     }
 </style>
