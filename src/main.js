@@ -7,7 +7,7 @@ import './registerServiceWorker'
 import './plugins/axios.js'
 import './plugins/particles.js'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 let _ = require('lodash');
 
@@ -15,4 +15,4 @@ new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');

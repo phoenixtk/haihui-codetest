@@ -44,7 +44,7 @@
                         </el-menu>
                     </el-col>
                 </el-aside>
-                <el-main>
+                <el-main  class="main">
                     <router-view></router-view>
                 </el-main>
             </el-container>
@@ -85,15 +85,18 @@
             height: 100%;
             position: absolute;
             width: 100%;
-            height: 100%;
             z-index: 10;
 
             .header {
                 background: #30c9e8;
+
             }
 
             .aside {
                 background: #f7f8fa;
+            }
+            .main {
+                padding: 0;
             }
         }
 

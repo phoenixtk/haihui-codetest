@@ -13,7 +13,7 @@ module.exports = {
             css:  {},
             less: {},
             sass: {
-                /*data: `@import "@/assets/css/main.scss";`*/
+                /*treeData: `@import "@/assets/css/main.scss";`*/
             }
         },
     },
