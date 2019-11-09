@@ -32,7 +32,13 @@
             ></el-tree>
         </div>
         <div class="pet-right">
-            <canvas id="stcanvas" width='800' height='800'></canvas>
+            <div>
+                <canvas id="stcanvas" width='800' height='800'></canvas>
+            </div>
+            <div style="margin: 50px">
+                <el-button @click="downloadImg">download</el-button>
+            </div>
+
         </div>
     </div>
 </template>
@@ -159,6 +165,23 @@
                         stcanvas.add(oImg);
                     });
                 }
+            },
+            downloadImg() {
+                // var svg = stcanvas.toSVG();
+                var png = stcanvas.toDataURL("image/png");
+                // console.log(png);
+                this.saveFile(png, 'nopay');
+            },
+            saveFile(data, filename) {
+                var save_link = document.createElementNS(
+                    'http://www.w3.org/1999/xhtml', 'a');
+                save_link.href = data;
+                save_link.download = filename;
+
+                var event = document.createEvent('MouseEvents');
+                event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0,
+                    false, false, false, false, 0, null);
+                save_link.dispatchEvent(event);
             }
         },
         created() {
@@ -210,6 +233,7 @@
             border-radius: 10px;
             background-color: white;
             margin: 15px;
+            display: flex;
         }
     }
 
