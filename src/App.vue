@@ -25,8 +25,8 @@
             </el-header>
             <el-container>
 
-                <el-aside class="aside" width="200px">
-                    <el-col :span="24">
+                <el-aside class="aside">
+                    <el-col>
                         <el-menu
                                 default-active="1"
                                 class="el-menu-vertical-demo"
@@ -73,6 +73,7 @@
             height: 100%;
             z-index: 1;
         }
+
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -94,6 +95,13 @@
             .aside {
                 background: #f7f8fa;
             }
+        }
+
+    }
+
+    @media screen and (max-width: 1200px) {
+        .aside {
+            display: none;
         }
     }
 </style>

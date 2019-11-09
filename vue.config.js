@@ -1,7 +1,8 @@
 module.exports = {
     css:                   {
         // 当为true时，css文件名可省略 module 默认为 false
-        modules:       false,
+        // modules:       false,
+        requireModuleExtension: true,
         // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中,当作为一个库构建时，你也可以将其设置为 false 免得用户自己导入 CSS
         // 默认生产环境下是 true，开发环境下是 false
         extract:       false,
@@ -21,7 +22,7 @@ module.exports = {
         open:    true,
         overlay: {
             warnings: false,
-            errors:   true,
+            errors:   false,
         },
         proxy:   {
             // change xxx-api/login => mock/login
@@ -35,4 +36,5 @@ module.exports = {
             },
         },
     },
+    lintOnSave: false,
 }

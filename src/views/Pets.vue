@@ -13,6 +13,7 @@
                 this.axios.get("/owners").then(res=>{
                     console.log(res);
                 })
+                console.log(_.debounce);
             }
         }
     }

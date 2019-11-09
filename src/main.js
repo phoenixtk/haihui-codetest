@@ -9,6 +9,7 @@ import './plugins/particles.js'
 
 Vue.config.productionTip = false
 
+let _ = require('lodash');
 
 new Vue({
   router,
