@@ -32,12 +32,14 @@
             ></el-tree>
         </div>
         <div class="pet-right">
-            <i class="el-icon-edit"></i>
+            <canvas id="stcanvas" width='800' height='800'></canvas>
         </div>
     </div>
 </template>
 
 <script>
+    import {fabric} from 'fabric'
+
     export default {
         name: "Pets",
         data() {
@@ -46,7 +48,8 @@
                 defaultProps: {
                     children: 'children',
                     label: 'label'
-                }
+                },
+                imgcount: 0
             };
         },
         methods: {
@@ -74,6 +77,7 @@
                     }
                     return petChildren;
                 }
+
                 let treeData = [];
                 // node Male
                 let nMale = {
@@ -86,6 +90,7 @@
                     imgsrc: require("@/assets/images/baobia.svg")
                 };
                 if (requestData) {
+                    requestData = _.orderBy(requestData, ['name'], ['asc'])
                     for (const owner of requestData) {
                         if (owner.gender === 'Male') {
                             if (!nMale.children) {
@@ -122,23 +127,48 @@
                 treeData.push(nFemale);
                 this.treeData = treeData;
             },
-            renderContent(h, { node, data, store }) {
+            renderContent(h, {node, data, store}) {
                 return (
-                    <span class="custom-tree-node">
-                    <i class={data.className}></i>
-                        <img src={data.imgsrc}  style="width:14px;height:14px;"/>
-                    <span style="margin-left:5px;">{node.label}</span>
-                    </span>
-                );
+                    < span
+            class
+                = "custom-tree-node" >
+                    < i
+            class
+                = {data.className} > < /i>
+                    < img
+                src = {data.imgsrc}
+                style = "width:14px;height:14px;" / >
+                    < span
+                style = "margin-left:5px;" > {node.label} < /span>
+                    < /span>
+            )
+                ;
             },
             handleNodeClick(data) {
                 if (data && data.type && data.type === 'cat') {
-                    alert(435);
+                    this.imgcount++;
+                    if (this.imgcount > 6) {
+                        this.$message.error(`oh no, too many cats here, doesn't work!`);
+                        return;
+                    }
+
+
+                    var rect = new fabric.Rect({
+                        left: 800 * Math.random(),//距离画布左侧的距离，单位是像素
+                        top: 800 * Math.random(),//距离画布上边的距离
+                        fill: 'red',//填充的颜色
+                        width: 30,//方形的宽度
+                        height: 30//方形的高度
+                    });
+                    stcanvas.add(rect);
                 }
             }
         },
         created() {
             this.getData();
+        },
+        mounted() {
+            window.stcanvas = new fabric.Canvas('stcanvas');
         }
     }
 </script>
@@ -151,12 +181,14 @@
         width: 100%;
         height: 100%;
         background-color: #F2F2F2;
+
         .particles {
             position: absolute;
             width: 100%;
             height: 100%;
             z-index: 1;
         }
+
         &-left {
             position: absolute;
             z-index: 10;
@@ -165,6 +197,7 @@
             margin: 15px;
             border-radius: 10px;
             background-color: white;
+
             &-tree {
                 margin: 15px;
             }
@@ -179,6 +212,13 @@
             margin: 15px;
             border-radius: 10px;
             background-color: white;
+            margin: 15px;
         }
+    }
+
+    #stcanvas {
+        margin: 15px;
+        border: 1px solid #d3d1ff;
+        border-radius: 10px
     }
 </style>
