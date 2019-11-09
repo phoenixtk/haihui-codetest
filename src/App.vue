@@ -1,24 +1,5 @@
 <template>
     <div id="app">
-        <vue-particles
-                class="particles"
-                color="#dedede"
-                :particleOpacity="0.7"
-                :particlesNumber="10"
-                shapeType="circle"
-                :particleSize="4"
-                linesColor="#dedede"
-                :linesWidth="1"
-                :lineLinked="true"
-                :lineOpacity="0.4"
-                :linesDistance="150"
-                :moveSpeed="3"
-                :hoverEffect="true"
-                hoverMode="grab"
-                :clickEffect="true"
-                clickMode="push"
-        >
-        </vue-particles>
         <el-container class="container">
             <el-header class="header">
                 <h1>HAIHUI CODE TEST</h1>
@@ -45,7 +26,7 @@
                     </el-col>
                 </el-aside>
                 <el-main  class="main">
-                    <router-view></router-view>
+                    <router-view class="router-view"></router-view>
                 </el-main>
             </el-container>
         </el-container>
@@ -67,12 +48,7 @@
     }
 
     #app {
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
+
 
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;

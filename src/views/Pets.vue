@@ -1,11 +1,38 @@
 <template>
     <div class="pet">
+
+        <vue-particles
+                class="particles"
+                color="#dedede"
+                :particleOpacity="0.7"
+                :particlesNumber="80"
+                shapeType="circle"
+                :particleSize="4"
+                linesColor="#dedede"
+                :linesWidth="1"
+                :lineLinked="true"
+                :lineOpacity="0.4"
+                :linesDistance="150"
+                :moveSpeed="3"
+                :hoverEffect="true"
+                hoverMode="grab"
+                :clickEffect="true"
+                clickMode="push"
+        >
+        </vue-particles>
         <div class="pet-left">
-            <el-button @click="getData">aaa</el-button>
-            <el-tree :data="treeData" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+            <!--<el-button @click="getData">aaa</el-button>-->
+            <el-tree
+                    class="pet-left-tree"
+                    :data="treeData"
+                    :props="defaultProps"
+                    @node-click="handleNodeClick"
+                    :default-expand-all="true"
+                    :render-content="renderContent"
+            ></el-tree>
         </div>
         <div class="pet-right">
-            pet-right
+            <i class="el-icon-edit"></i>
         </div>
     </div>
 </template>
@@ -25,57 +52,10 @@
         methods: {
             getData() {
                 this.axios.get("/owners").then(res => {
-                    console.log(res);
                     this.getTreedataByRequestData(res.data)
                 });
             },
             getTreedataByRequestData(requestData) {
-                /*let treeData = [{
-                    label: '一级 1',
-                    children: [{
-                        label: '二级 1-1',
-                        children: [{
-                            label: '三级 1-1-1'
-                        }]
-                    }]
-                }, {
-                    label: '一级 2',
-                    children: [{
-                        label: '二级 2-1',
-                        children: [{
-                            label: '三级 2-1-1'
-                        }]
-                    }, {
-                        label: '二级 2-2',
-                        children: [{
-                            label: '三级 2-2-1'
-                        }]
-                    }]
-                }, {
-                    label: '一级 3',
-                    children: [{
-                        label: '二级 3-1',
-                        children: [{
-                            label: '三级 3-1-1'
-                        }]
-                    }, {
-                        label: '二级 3-2',
-                        children: [{
-                            label: '三级 3-2-1'
-                        }]
-                    }]
-                }];*/
-
-                let treeData = [];
-                // node Male
-                let nMale = {
-                    label: 'Male',
-                };
-                // node Female
-                let nFemale = {
-                    label: 'Female',
-                };
-
                 function getPetChildren(owner) {
                     let petChildren;
                     if (owner.pets) {
@@ -86,84 +66,119 @@
                                 }
                                 petChildren.push({
                                     label: pet.name,
+                                    imgsrc: require("@/assets/images/cat.svg"),
+                                    type: 'cat'
                                 });
                             }
                         }
                     }
                     return petChildren;
                 }
-
+                let treeData = [];
+                // node Male
+                let nMale = {
+                    label: 'Male',
+                    imgsrc: require("@/assets/images/baobia.svg")
+                };
+                // node Female
+                let nFemale = {
+                    label: 'Female',
+                    imgsrc: require("@/assets/images/baobia.svg")
+                };
                 if (requestData) {
                     for (const owner of requestData) {
                         if (owner.gender === 'Male') {
                             if (!nMale.children) {
                                 nMale.children = [];
                             }
-
                             let petChildren = getPetChildren(owner);
-
-
                             let nOwner = {
                                 label: owner.name,
-                                age: owner.age
+                                age: owner.age,
+                                imgsrc: require("@/assets/images/male.svg")
                             };
-
                             if (petChildren) {
                                 nOwner.children = petChildren;
                             }
-
-
                             nMale.children.push(nOwner);
                         } else {
                             if (!nFemale.children) {
                                 nFemale.children = [];
                             }
-
                             let petChildren = getPetChildren(owner);
-
-
                             let nOwner = {
                                 label: owner.name,
-                                age: owner.age
+                                age: owner.age,
+                                imgsrc: require("@/assets/images/female.svg")
                             };
-
                             if (petChildren) {
                                 nOwner.children = petChildren;
                             }
-
-
                             nFemale.children.push(nOwner);
                         }
                     }
                 }
-
                 treeData.push(nMale);
                 treeData.push(nFemale);
-
                 this.treeData = treeData;
-
+            },
+            renderContent(h, { node, data, store }) {
+                return (
+                    <span class="custom-tree-node">
+                    <i class={data.className}></i>
+                        <img src={data.imgsrc}  style="width:14px;height:14px;"/>
+                    <span style="margin-left:5px;">{node.label}</span>
+                    </span>
+                );
             },
             handleNodeClick(data) {
-                console.log(data);
+                if (data && data.type && data.type === 'cat') {
+                    alert(435);
+                }
             }
+        },
+        created() {
+            this.getData();
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    .pet {
-        display: flex;
-        flex-direction: row;
-        padding: 0;
 
+    .pet {
+        position: relative;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #F2F2F2;
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
         &-left {
-            flex: 1;
-            background-color: aqua;
+            position: absolute;
+            z-index: 10;
+            width: 20%;
+            height: 95%;
+            margin: 15px;
+            border-radius: 10px;
+            background-color: white;
+            &-tree {
+                margin: 15px;
+            }
         }
 
         &-right {
-            flex: 4;
-            background-color: beige;
+            position: absolute;
+            z-index: 10;
+            width: 75%;
+            left: 22%;
+            height: 95%;
+            margin: 15px;
+            border-radius: 10px;
+            background-color: white;
         }
     }
 </style>
