@@ -1,7 +1,7 @@
 # haihui-codetest
 
 
-[ONLINE SHOW](https://www.dlwfd.shop/)
+[ONLINE SHOW](http://www.dlwfd.shop/)
 
 ## Project setup
 Make sure of that you had installed webpack globally.
